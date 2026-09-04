@@ -47,13 +47,24 @@ function renderAlphabetScreen() {
   grid.innerHTML = '<h3>独自の文字</h3>' + letterCards + '<h3>特殊な組み合わせ</h3>' + digraphCards;
 }
 
+function speakPolish(text) {
+  if (!('speechSynthesis' in window)) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'pl-PL';
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
+}
+
 function renderCategoryScreen(categoryId) {
   const category = POLISH_DATA.categories.find(c => c.id === categoryId);
   document.getElementById('category-title').textContent = category.title;
   const grid = document.getElementById('phrase-grid');
   grid.innerHTML = category.phrases.map((phrase, index) => `
-    <div class="card phrase-card" data-action="toggle-phrase" data-index="${index}">
-      <div class="pl">${escapeHtml(phrase.pl)}</div>
+    <div class="card phrase-card" data-index="${index}">
+      <div class="pl-row">
+        <div class="pl">${escapeHtml(phrase.pl)}</div>
+        <button class="speak-btn" data-action="speak" data-text="${escapeHtml(phrase.pl)}" aria-label="発音を再生">🔊</button>
+      </div>
       <div class="reading">${escapeHtml(phrase.reading)}</div>
       <div class="details">
         <div class="ja">${escapeHtml(phrase.ja)}</div>
@@ -171,8 +182,8 @@ document.addEventListener('click', (event) => {
   } else if (action === 'open-category') {
     renderCategoryScreen(target.dataset.categoryId);
     showScreen('screen-category');
-  } else if (action === 'toggle-phrase') {
-    target.classList.toggle('revealed');
+  } else if (action === 'speak') {
+    speakPolish(target.dataset.text);
   } else if (action === 'open-quiz-setup') {
     const categoryId = document.getElementById('phrase-grid').dataset.categoryId;
     document.getElementById('screen-quiz-setup').dataset.categoryId = categoryId;

@@ -69,13 +69,30 @@ body {
 .category-card .icon { font-size: 1.8rem; }
 .category-card .title { font-weight: bold; margin-top: 8px; font-size: 0.95rem; }
 
-.phrase-card { margin-bottom: 12px; cursor: pointer; }
+.phrase-card { margin-bottom: 12px; }
+.phrase-card .pl-row { display: flex; align-items: center; gap: 10px; }
 .phrase-card .pl { font-size: 1.15rem; font-weight: bold; color: var(--color-primary-dark); }
 .phrase-card .reading { color: var(--color-secondary-dark); font-size: 0.95rem; margin-top: 2px; }
-.phrase-card .details { display: none; margin-top: 10px; border-top: 1px dashed #eee; padding-top: 10px; }
-.phrase-card.revealed .details { display: block; }
+.phrase-card .details { margin-top: 10px; border-top: 1px dashed #eee; padding-top: 10px; }
 .phrase-card .ja { font-size: 1rem; }
 .phrase-card .note { color: var(--color-text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+.speak-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.speak-btn:hover { background: var(--color-secondary-dark); }
 
 .btn {
   display: inline-block;
