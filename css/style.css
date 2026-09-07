@@ -58,6 +58,27 @@ body {
   box-shadow: 0 2px 8px rgba(232, 93, 143, 0.12);
 }
 
+.search-input {
+  display: block;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 2px solid #f0d8e2;
+  font-size: 1rem;
+  margin-top: 12px;
+  box-sizing: border-box;
+}
+
+.search-input:focus { outline: none; border-color: var(--color-secondary); }
+
+.search-hint { color: var(--color-text-muted); margin-top: 16px; }
+
+.search-result-category {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
 .category-card {
   cursor: pointer;
   border: 2px solid transparent;

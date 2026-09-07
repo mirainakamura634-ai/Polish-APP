@@ -19,6 +19,11 @@ function showScreen(screenId) {
 
 function renderTopScreen() {
   const grid = document.getElementById('category-grid');
+  const searchCard = `
+    <div class="card category-card" data-action="open-search">
+      <div class="icon">🔍</div>
+      <div class="title">フレーズを検索</div>
+    </div>`;
   const alphabetCard = `
     <div class="card category-card" data-action="open-alphabet">
       <div class="icon">🔤</div>
@@ -29,7 +34,45 @@ function renderTopScreen() {
       <div class="icon">${CATEGORY_ICONS[category.id] || '📘'}</div>
       <div class="title">${escapeHtml(category.title)}</div>
     </div>`).join('');
-  grid.innerHTML = alphabetCard + categoryCards;
+  grid.innerHTML = searchCard + alphabetCard + categoryCards;
+}
+
+function renderSearchResults(query) {
+  const trimmed = query.trim();
+  const resultsEl = document.getElementById('search-results');
+
+  if (!trimmed) {
+    resultsEl.innerHTML = '<p class="search-hint">日本語でフレーズを入力すると、登録されているポーランド語フレーズを検索できます。</p>';
+    return;
+  }
+
+  const matches = [];
+  POLISH_DATA.categories.forEach(category => {
+    category.phrases.forEach(phrase => {
+      if (phrase.ja.includes(trimmed)) {
+        matches.push({ category, phrase });
+      }
+    });
+  });
+
+  if (matches.length === 0) {
+    resultsEl.innerHTML = '<p class="search-hint">見つかりませんでした。</p>';
+    return;
+  }
+
+  resultsEl.innerHTML = matches.map(({ category, phrase }) => `
+    <div class="card phrase-card">
+      <div class="search-result-category">${escapeHtml(category.title)}</div>
+      <div class="pl-row">
+        <div class="pl">${escapeHtml(phrase.pl)}</div>
+        <button class="speak-btn" data-action="speak" data-text="${escapeHtml(phrase.pl)}" aria-label="発音を再生">🔊</button>
+      </div>
+      <div class="reading">${escapeHtml(phrase.reading)}</div>
+      <div class="details">
+        <div class="ja">${escapeHtml(phrase.ja)}</div>
+        ${phrase.note ? `<div class="note">${escapeHtml(phrase.note)}</div>` : ''}
+      </div>
+    </div>`).join('');
 }
 
 function renderAlphabetScreen() {
@@ -177,6 +220,10 @@ document.addEventListener('click', (event) => {
 
   if (action === 'back-to-top') {
     showScreen('screen-top');
+  } else if (action === 'open-search') {
+    showScreen('screen-search');
+    renderSearchResults(document.getElementById('search-input').value);
+    document.getElementById('search-input').focus();
   } else if (action === 'open-alphabet') {
     renderAlphabetScreen();
     showScreen('screen-alphabet');
@@ -198,6 +245,10 @@ document.addEventListener('click', (event) => {
   } else if (action === 'next-question') {
     nextQuestion();
   }
+});
+
+document.getElementById('search-input').addEventListener('input', (event) => {
+  renderSearchResults(event.target.value);
 });
 
 document.addEventListener('DOMContentLoaded', () => {

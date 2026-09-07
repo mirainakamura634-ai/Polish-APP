@@ -165,7 +165,13 @@ const POLISH_DATA = {
         { pl: "Jest ciepło", reading: "イェスト チェプウォ", ja: "暖かい", note: "" },
         { pl: "Jest wietrznie", reading: "イェスト ヴィェトシニェ", ja: "風が強い", note: "" },
         { pl: "Jest pochmurno", reading: "イェスト ポフムルノ", ja: "曇ってる", note: "" },
-        { pl: "Będzie ładna pogoda", reading: "ベンジェ ワドナ ポゴダ", ja: "いい天気になるよ", note: "" }
+        { pl: "Będzie ładna pogoda", reading: "ベンジェ ワドナ ポゴダ", ja: "いい天気になるよ", note: "" },
+        { pl: "słonecznie", reading: "スウォネチニェ", ja: "晴れ", note: "天気を表す副詞。Jest słonecznie(晴れてるよ)の形で使う" },
+        { pl: "deszcz", reading: "デシュチ", ja: "雨", note: "雨そのものを表す名詞。Pada deszcz(雨が降ってる)のように使う" },
+        { pl: "pochmurno", reading: "ポフムルノ", ja: "曇り", note: "天気を表す副詞。Jest pochmurno(曇ってるよ)の形で使う" },
+        { pl: "śnieg", reading: "シニェク", ja: "雪", note: "雪そのものを表す名詞。Pada śnieg(雪が降ってる)のように使う" },
+        { pl: "wiatr", reading: "ヴィアトル", ja: "風", note: "風そのものを表す名詞" },
+        { pl: "Jest chłodno", reading: "イェスト フウォドノ", ja: "涼しい", note: "" }
       ]
     },
     {
