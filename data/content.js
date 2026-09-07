@@ -93,6 +93,8 @@ const POLISH_DATA = {
         { pl: "Nie ma za co", reading: "ニェ マ ザ ツォ", ja: "どういたしまして", note: "" },
         { pl: "Przepraszam", reading: "プシェプラシャム", ja: "すみません、ごめんなさい", note: "" },
         { pl: "Czy możesz mi pomóc?", reading: "チ モジェシュ ミ ポムツ", ja: "手伝ってくれる?", note: "" },
+        { pl: "Mogę ci pomóc?", reading: "モゲン チ ポムツ", ja: "手伝おうか?", note: "自分から手伝いを申し出るとき" },
+        { pl: "Pomóż mi!", reading: "ポムシュ ミ", ja: "手伝って!", note: "直接的なお願い(命令形)" },
         { pl: "Mogę prosić o...?", reading: "モゲン プロシチ オ", ja: "…をお願いできますか?", note: "「…」に欲しい物を入れる" },
         { pl: "Nie szkodzi", reading: "ニェ シュコジ", ja: "大丈夫だよ、気にしないで", note: "" },
         { pl: "Dzięki", reading: "ジェンキ", ja: "ありがと(カジュアル)", note: "Dziękujęのくだけた形" },
@@ -128,7 +130,56 @@ const POLISH_DATA = {
         { pl: "Na zdrowie", reading: "ナ ズドロヴィェ", ja: "乾杯!/お大事に", note: "くしゃみをした人にも、乾杯の時にも使う" },
         { pl: "Kocham cię", reading: "コハム チェン", ja: "愛してるよ", note: "" },
         { pl: "Tęsknię za tobą", reading: "テンスクニェン ザ トバン", ja: "会いたいよ、恋しいよ", note: "" },
-        { pl: "Uważaj na siebie", reading: "ウヴァジャイ ナ シェビェ", ja: "気をつけてね", note: "" }
+        { pl: "Uważaj na siebie", reading: "ウヴァジャイ ナ シェビェ", ja: "気をつけてね", note: "" },
+        { pl: "Pobawmy się znowu", reading: "ポバヴミ シェン ズノヴ", ja: "また遊ぼうね", note: "子供や家族とのカジュアルな誘い文句" },
+        { pl: "Powodzenia!", reading: "ポヴォゼニャ", ja: "頑張ってね!/幸運を!", note: "出かける家族を応援するときの決まり文句" }
+      ]
+    },
+    {
+      id: "colors",
+      title: "色",
+      phrases: [
+        { pl: "czerwony", reading: "チェルヴォヌィ", ja: "赤", note: "形容詞は名詞の性で語尾が変わる(ここでは男性形)。例: czerwony dom(赤い家)" },
+        { pl: "niebieski", reading: "ニェビェスキ", ja: "青", note: "" },
+        { pl: "żółty", reading: "ジュウティ", ja: "黄色", note: "" },
+        { pl: "zielony", reading: "ジェロヌィ", ja: "緑", note: "" },
+        { pl: "czarny", reading: "チャルヌィ", ja: "黒", note: "" },
+        { pl: "biały", reading: "ビャウィ", ja: "白", note: "" },
+        { pl: "różowy", reading: "ルジョヴィ", ja: "ピンク", note: "" },
+        { pl: "szary", reading: "シャルィ", ja: "グレー", note: "" },
+        { pl: "brązowy", reading: "ブロンゾヴィ", ja: "茶色", note: "" },
+        { pl: "fioletowy", reading: "フィオレトヴィ", ja: "紫", note: "" },
+        { pl: "Jakiego to jest koloru?", reading: "ヤキェゴ ト イェスト コロル", ja: "これは何色?", note: "色を尋ねる決まり文句" }
+      ]
+    },
+    {
+      id: "weather",
+      title: "天気",
+      phrases: [
+        { pl: "Jaka jest dzisiaj pogoda?", reading: "ヤカ イェスト ジシャイ ポゴダ", ja: "今日の天気は?", note: "天気を尋ねる基本フレーズ" },
+        { pl: "Jest słonecznie", reading: "イェスト スウォネチニェ", ja: "晴れてるよ", note: "" },
+        { pl: "Pada deszcz", reading: "パダ デシュチ", ja: "雨が降ってる", note: "" },
+        { pl: "Pada śnieg", reading: "パダ シニェク", ja: "雪が降ってる", note: "" },
+        { pl: "Jest zimno", reading: "イェスト ジムノ", ja: "寒い", note: "" },
+        { pl: "Jest gorąco", reading: "イェスト ゴロンツォ", ja: "暑い", note: "" },
+        { pl: "Jest ciepło", reading: "イェスト チェプウォ", ja: "暖かい", note: "" },
+        { pl: "Jest wietrznie", reading: "イェスト ヴィェトシニェ", ja: "風が強い", note: "" },
+        { pl: "Jest pochmurno", reading: "イェスト ポフムルノ", ja: "曇ってる", note: "" },
+        { pl: "Będzie ładna pogoda", reading: "ベンジェ ワドナ ポゴダ", ja: "いい天気になるよ", note: "" }
+      ]
+    },
+    {
+      id: "impressions",
+      title: "好み・感想",
+      phrases: [
+        { pl: "Lubię to", reading: "ルビェン ト", ja: "これが好き", note: "Lubię ○○で「○○が好き」というパターンにも使える" },
+        { pl: "Bardzo lubię to", reading: "バルヅォ ルビェン ト", ja: "これがすごく好き", note: "" },
+        { pl: "Chcę to", reading: "フツェン ト", ja: "これが欲しい", note: "Chcę ○○で「○○が欲しい」というパターンにも使える" },
+        { pl: "Nie chcę tego", reading: "ニェ フツェン テゴ", ja: "これはいらない", note: "" },
+        { pl: "Pyszne!", reading: "プィシュネ", ja: "おいしい!", note: "" },
+        { pl: "Niesmaczne", reading: "ニェスマチネ", ja: "まずい", note: "" },
+        { pl: "Podoba mi się to", reading: "ポドバ ミ シェン ト", ja: "これ気に入った", note: "" },
+        { pl: "Nie podoba mi się to", reading: "ニェ ポドバ ミ シェン ト", ja: "これは好きじゃない", note: "" }
       ]
     },
     {

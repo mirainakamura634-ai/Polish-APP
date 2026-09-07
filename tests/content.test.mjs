@@ -20,12 +20,12 @@ test('digraphs has 6 entries', () => {
   }
 });
 
-test('categories has exactly the 8 required categories', () => {
+test('categories has exactly the 11 required categories', () => {
   const expectedIds = [
     'greetings', 'fillers', 'feelings', 'questions',
-    'requests', 'answers', 'family', 'numbers'
+    'requests', 'answers', 'family', 'colors', 'weather', 'impressions', 'numbers'
   ];
-  assert.equal(POLISH_DATA.categories.length, 8);
+  assert.equal(POLISH_DATA.categories.length, 11);
   const actualIds = POLISH_DATA.categories.map(c => c.id);
   for (const id of expectedIds) {
     assert.ok(actualIds.includes(id), `missing category ${id}`);

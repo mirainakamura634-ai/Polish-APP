@@ -1,6 +1,7 @@
 const CATEGORY_ICONS = {
   greetings: '👋', fillers: '💬', feelings: '❤️', questions: '❓',
-  requests: '🙏', answers: '✅', family: '🏠', numbers: '🔢'
+  requests: '🙏', answers: '✅', family: '🏠', numbers: '🔢',
+  colors: '🎨', weather: '☀️', impressions: '😋'
 };
 
 function escapeHtml(str) {
