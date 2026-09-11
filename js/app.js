@@ -37,6 +37,37 @@ function renderTopScreen() {
   grid.innerHTML = searchCard + alphabetCard + categoryCards;
 }
 
+function renderPhraseCard(phrase, extraHtml) {
+  const breakdownHtml = (phrase.breakdown && phrase.breakdown.length > 0) ? `
+    <button class="breakdown-toggle" data-action="toggle-breakdown">単語の意味を見る ▾</button>
+    <div class="breakdown-list">
+      ${phrase.breakdown.map(item => `
+        <div class="breakdown-item">
+          <div class="breakdown-word-row">
+            <span class="breakdown-word">${escapeHtml(item.word)}</span>
+            <button class="speak-btn small" data-action="speak" data-text="${escapeHtml(item.word)}" aria-label="発音を再生">🔊</button>
+          </div>
+          <div class="reading">${escapeHtml(item.reading)}</div>
+          <div class="breakdown-meaning">${escapeHtml(item.ja)}</div>
+        </div>`).join('')}
+    </div>` : '';
+
+  return `
+    <div class="card phrase-card">
+      ${extraHtml || ''}
+      <div class="pl-row">
+        <div class="pl">${escapeHtml(phrase.pl)}</div>
+        <button class="speak-btn" data-action="speak" data-text="${escapeHtml(phrase.pl)}" aria-label="発音を再生">🔊</button>
+      </div>
+      <div class="reading">${escapeHtml(phrase.reading)}</div>
+      <div class="details">
+        <div class="ja">${escapeHtml(phrase.ja)}</div>
+        ${phrase.note ? `<div class="note">${escapeHtml(phrase.note)}</div>` : ''}
+        ${breakdownHtml}
+      </div>
+    </div>`;
+}
+
 function renderSearchResults(query) {
   const trimmed = query.trim();
   const resultsEl = document.getElementById('search-results');
@@ -60,19 +91,9 @@ function renderSearchResults(query) {
     return;
   }
 
-  resultsEl.innerHTML = matches.map(({ category, phrase }) => `
-    <div class="card phrase-card">
-      <div class="search-result-category">${escapeHtml(category.title)}</div>
-      <div class="pl-row">
-        <div class="pl">${escapeHtml(phrase.pl)}</div>
-        <button class="speak-btn" data-action="speak" data-text="${escapeHtml(phrase.pl)}" aria-label="発音を再生">🔊</button>
-      </div>
-      <div class="reading">${escapeHtml(phrase.reading)}</div>
-      <div class="details">
-        <div class="ja">${escapeHtml(phrase.ja)}</div>
-        ${phrase.note ? `<div class="note">${escapeHtml(phrase.note)}</div>` : ''}
-      </div>
-    </div>`).join('');
+  resultsEl.innerHTML = matches.map(({ category, phrase }) =>
+    renderPhraseCard(phrase, `<div class="search-result-category">${escapeHtml(category.title)}</div>`)
+  ).join('');
 }
 
 function renderAlphabetScreen() {
@@ -103,18 +124,7 @@ function renderCategoryScreen(categoryId) {
   const category = POLISH_DATA.categories.find(c => c.id === categoryId);
   document.getElementById('category-title').textContent = category.title;
   const grid = document.getElementById('phrase-grid');
-  grid.innerHTML = category.phrases.map((phrase, index) => `
-    <div class="card phrase-card" data-index="${index}">
-      <div class="pl-row">
-        <div class="pl">${escapeHtml(phrase.pl)}</div>
-        <button class="speak-btn" data-action="speak" data-text="${escapeHtml(phrase.pl)}" aria-label="発音を再生">🔊</button>
-      </div>
-      <div class="reading">${escapeHtml(phrase.reading)}</div>
-      <div class="details">
-        <div class="ja">${escapeHtml(phrase.ja)}</div>
-        ${phrase.note ? `<div class="note">${escapeHtml(phrase.note)}</div>` : ''}
-      </div>
-    </div>`).join('');
+  grid.innerHTML = category.phrases.map(phrase => renderPhraseCard(phrase)).join('');
   grid.dataset.categoryId = categoryId;
 
   const setupTitle = document.getElementById('quiz-setup-title');
@@ -232,6 +242,10 @@ document.addEventListener('click', (event) => {
     showScreen('screen-category');
   } else if (action === 'speak') {
     speakPolish(target.dataset.text);
+  } else if (action === 'toggle-breakdown') {
+    const list = target.nextElementSibling;
+    const expanded = list.classList.toggle('expanded');
+    target.textContent = expanded ? '単語の意味を隠す ▴' : '単語の意味を見る ▾';
   } else if (action === 'open-quiz-setup') {
     const categoryId = document.getElementById('phrase-grid').dataset.categoryId;
     document.getElementById('screen-quiz-setup').dataset.categoryId = categoryId;

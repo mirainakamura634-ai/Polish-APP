@@ -115,6 +115,36 @@ body {
 
 .speak-btn:hover { background: var(--color-secondary-dark); }
 
+.speak-btn.small { width: 28px; height: 28px; font-size: 0.85rem; }
+
+.breakdown-toggle {
+  display: inline-block;
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: var(--color-secondary-dark);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.breakdown-toggle:hover { text-decoration: underline; }
+
+.breakdown-list { display: none; margin-top: 8px; }
+.breakdown-list.expanded { display: block; }
+
+.breakdown-item {
+  background: var(--color-bg);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-top: 6px;
+}
+
+.breakdown-word-row { display: flex; align-items: center; gap: 8px; }
+.breakdown-word { font-weight: bold; color: var(--color-primary-dark); }
+.breakdown-item .reading { margin-top: 2px; }
+.breakdown-meaning { font-size: 0.9rem; margin-top: 2px; }
+
 .btn {
   display: inline-block;
   background: var(--color-primary);

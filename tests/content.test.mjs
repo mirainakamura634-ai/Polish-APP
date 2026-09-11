@@ -47,3 +47,20 @@ test('every category has at least 8 phrases with required fields', () => {
     }
   }
 });
+
+test('every phrase breakdown item has word, reading, and ja fields', () => {
+  for (const category of POLISH_DATA.categories) {
+    for (const phrase of category.phrases) {
+      if (!phrase.breakdown) continue;
+      assert.ok(Array.isArray(phrase.breakdown), `${phrase.pl} breakdown is not an array`);
+      for (const item of phrase.breakdown) {
+        assert.equal(typeof item.word, 'string');
+        assert.equal(typeof item.reading, 'string');
+        assert.equal(typeof item.ja, 'string');
+        assert.ok(item.word.length > 0, `${phrase.pl} has an empty breakdown word`);
+        assert.ok(item.reading.length > 0, `${phrase.pl} has an empty breakdown reading`);
+        assert.ok(item.ja.length > 0, `${phrase.pl} has an empty breakdown meaning`);
+      }
+    }
+  }
+});
